@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".MascotasFav">
 
-    <include android:id="@+id/miActionBar"
+    <!--include android:id="@+id/miActionBar"
         layout="@layout/action_bar_fav"
-        ></include>
+        ></include-->
 
     <!--TextView
         android:layout_width="wrap_content"
@@ -23,7 +23,8 @@
         android:id="@+id/rvMascotasFav"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/miActionBar"
         />
+
+    <!--android:layout_below="@id/miActionBar"-->
 
 </RelativeLayout>

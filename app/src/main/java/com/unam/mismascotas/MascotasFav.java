@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -32,9 +35,10 @@ public class MascotasFav extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mascotas_fav);
+        //getSupportActionBar().setTitle(Html.fromHtml("<font color='#000000'>Mascotas</font>"));
 
-        Toolbar miActionBar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.miActionBar_fav);
-        setSupportActionBar(miActionBar);
+        //Toolbar miActionBar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.miActionBar_fav);
+        //setSupportActionBar(miActionBar);
 
         Intent intent = getIntent();
 
@@ -66,14 +70,21 @@ public class MascotasFav extends AppCompatActivity{
 
         inicializarAdaptador();
 
-        ibFlecha = (ImageButton) findViewById(R.id.ibFlecha);
+        /*ibFlecha = (ImageButton) findViewById(R.id.ibFlecha);
         ibFlecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent (MascotasFav.this, MainActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_mascotas_fav, menu);
+        return true;
     }
 
     public void inicializarAdaptador(){
