@@ -6,7 +6,9 @@ import android.os.Parcelable;
 import java.io.Serializable;
 
 public class Mascota implements Serializable {
+    private int id_mascota;
     private int foto;
+
     private String nombre;
     private int likes;
 
@@ -20,6 +22,17 @@ public class Mascota implements Serializable {
         this.foto = foto;
         this.nombre = nombre;
         this.likes = likes;
+    }
+
+    public Mascota() {
+    }
+
+    public int getId_mascota() {
+        return id_mascota;
+    }
+
+    public void setId_mascota(int id_mascota) {
+        this.id_mascota = id_mascota;
     }
 
     public int getFoto() {

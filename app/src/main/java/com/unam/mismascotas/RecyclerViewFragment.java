@@ -19,12 +19,13 @@ import android.widget.ImageButton;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RecyclerViewFragment extends Fragment {
+public class RecyclerViewFragment extends Fragment implements iRecyclerViewFragmentView{
 
 
     private RecyclerView listaMascotas;
     ArrayList<Mascota> mascotas;
     private ImageButton favoritos;
+    private iRecyclerViewFragmentPresenter presenter;
 
     public RecyclerViewFragment() {
         // Required empty public constructor
@@ -39,24 +40,27 @@ public class RecyclerViewFragment extends Fragment {
         setHasOptionsMenu(true);
 
         listaMascotas = (RecyclerView) v.findViewById(R.id.rvMascotas);
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        listaMascotas.setLayoutManager(llm);
-        inicializarListaMascotas();
-        inicializarAdaptador();
-
+        //inicializarListaMascotas();
+        //inicializarAdaptador();
         favoritos = (ImageButton) v.findViewById(R.id.ibFavoritos);
 
+        //mascotas = new ConstructorMascotas(getActivity()).obtenerDatos();
+
+        presenter = new RecyclerViewFragmentPresenter(this, getContext());
+        //mascotas = new ConstructorMascotas(getActivity()).obtenerDatos();
 
         return v;
     }
+
 
     public void inicializarAdaptador(){
         MascotaAdaptador ma = new MascotaAdaptador(mascotas, getActivity());
         listaMascotas.setAdapter(ma);
     }
 
+    /*
     public void inicializarListaMascotas(){
+
         mascotas = new ArrayList<Mascota>();
         mascotas.add(new Mascota(R.drawable.perro1, "Tobby"));
         mascotas.add(new Mascota(R.drawable.perro2, "Chime"));
@@ -65,7 +69,8 @@ public class RecyclerViewFragment extends Fragment {
         mascotas.add(new Mascota(R.drawable.perro5, "Lucky"));
         mascotas.add(new Mascota(R.drawable.perro6, "Taco"));
         mascotas.add(new Mascota(R.drawable.perro7, "Violet"));
-    }
+
+    }*/
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -78,7 +83,7 @@ public class RecyclerViewFragment extends Fragment {
 
             case R.id.ibFavoritos:
                 Intent intent = new Intent (getActivity(), MascotasFav.class);
-                intent.putExtra("mismascotas", (Serializable) mascotas);
+                //intent.putExtra("mismascotas", (Serializable) mascotas);
                 startActivity(intent);
                 break;
             case R.id.mContact:
@@ -91,5 +96,24 @@ public class RecyclerViewFragment extends Fragment {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void generarLinearLayoutVertical() {
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        listaMascotas.setLayoutManager(llm);
+
+    }
+
+    @Override
+    public MascotaAdaptador crearAdaptador(ArrayList<Mascota> mascotas) {
+        MascotaAdaptador ma = new MascotaAdaptador(mascotas, getActivity());
+        return ma;
+    }
+
+    @Override
+    public void inicializarAdaptadorRV(MascotaAdaptador adaptador) {
+        listaMascotas.setAdapter(adaptador);
     }
 }

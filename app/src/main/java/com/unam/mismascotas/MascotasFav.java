@@ -35,49 +35,17 @@ public class MascotasFav extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mascotas_fav);
-        //getSupportActionBar().setTitle(Html.fromHtml("<font color='#000000'>Mascotas</font>"));
 
-        //Toolbar miActionBar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.miActionBar_fav);
-        //setSupportActionBar(miActionBar);
-
-        Intent intent = getIntent();
-
-        mascotas=(ArrayList<Mascota>) intent.getSerializableExtra("mismascotas");
-
-        int menor=100;
-        int iteracion=0;
-        int pos=0;
-
-        while(mascotas.size()>5){
-            if(mascotas.get(iteracion).getLikes()<menor){
-                menor=mascotas.get(iteracion).getLikes();
-                pos=iteracion;
-            }
-            if(iteracion==mascotas.size()-1){
-                iteracion=0;
-                mascotas.remove(pos);
-                menor=100;
-            }
-            iteracion++;
-        }
+        ConstructorMascotas cm = new ConstructorMascotas(getBaseContext());
+        mascotas = cm.obtener5FavMascotas();
 
         listaMascotas = (RecyclerView) findViewById(R.id.rvMascotasFav);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaMascotas.setLayoutManager(llm);
 
-        //Toast.makeText(MascotasFav.this, mascotas.get(0).getNombre(), Toast.LENGTH_SHORT).show();
-
         inicializarAdaptador();
 
-        /*ibFlecha = (ImageButton) findViewById(R.id.ibFlecha);
-        ibFlecha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent (MascotasFav.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });*/
     }
 
     @Override

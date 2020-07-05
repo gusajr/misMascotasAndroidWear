@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Html;
@@ -42,6 +44,23 @@ public class MainActivity extends AppCompatActivity {
         vp = (ViewPager) findViewById(R.id.viewPager);
 
         setUpViewPager();
+
+        BaseDatos baseDatos = new BaseDatos(getBaseContext());
+        SQLiteDatabase sqLiteDatabase = baseDatos.getWritableDatabase();
+        Cursor mCursor = sqLiteDatabase.rawQuery("SELECT * FROM " + ConstantesBD.TABLE_MASCOTA, null);
+        Boolean rowExists;
+
+        if (mCursor.moveToFirst()) {
+            rowExists = true;
+
+        } else {
+            rowExists = false;
+        }
+
+        if(!rowExists){
+            ConstructorMascotas constructorMascotas = new ConstructorMascotas(getBaseContext());
+            constructorMascotas.insertarMascotas(baseDatos);
+        }
 
         //if (tb != null) {
         //    setSupportActionBar(tb);

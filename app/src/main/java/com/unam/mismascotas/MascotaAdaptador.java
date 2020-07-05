@@ -17,6 +17,9 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
 
     ArrayList <Mascota> mascotas;
     Activity activity;
+    //private RecyclerView listaMascotas;
+    //private
+
 
     public MascotaAdaptador(ArrayList <Mascota> mascotas, Activity activity){
         this.mascotas=mascotas;
@@ -30,23 +33,33 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
         return new MascotaViewHolder(v);
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull final MascotaViewHolder mascotaViewHolder, int position) {
         final Mascota mascota = mascotas.get(position);
-        Integer nLikes;
-        nLikes = mascota.getLikes();
+
+        ConstructorMascotas constructorMascotas = new ConstructorMascotas(activity);
+        //constructorMascotas.darLikeMascota(mascota);
+        Integer likes = (constructorMascotas.obtenerLikesMascota(mascota));
+
         mascotaViewHolder.ivFoto.setImageResource(mascota.getFoto());
         mascotaViewHolder.tvNombre.setText(mascota.getNombre());
-        mascotaViewHolder.tvnLikes.setText((nLikes.toString()));
+        mascotaViewHolder.tvnLikes.setText(likes.toString());
 
         mascotaViewHolder.ibHuesoBlanco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Integer nLikes;
-                nLikes = mascota.getLikes();
-                nLikes++;
-                mascota.setLikes(nLikes);
-                mascotaViewHolder.tvnLikes.setText(nLikes.toString());
+                //Integer nLikes;
+                //nLikes = mascota.getLikes();
+                //nLikes++;
+                //mascota.setLikes(nLikes);
+                //mascotaViewHolder.tvnLikes.setText(nLikes.toString());
+                ConstructorMascotas constructorMascotas = new ConstructorMascotas(activity);
+                constructorMascotas.darLikeMascota(mascota);
+
+                Integer likes = (constructorMascotas.obtenerLikesMascota(mascota));
+                mascotaViewHolder.tvnLikes.setText(likes.toString());
             }
         });
     }
