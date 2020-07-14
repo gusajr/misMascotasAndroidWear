@@ -1,4 +1,4 @@
-package com.unam.mismascotas;
+package com.unam.mismascotas.db;
 
 public class ConstantesBD {
     public static final String DATABASE_NAME = "mascota";

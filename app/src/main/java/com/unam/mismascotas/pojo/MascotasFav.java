@@ -1,21 +1,19 @@
-package com.unam.mismascotas;
+package com.unam.mismascotas.pojo;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
+import com.unam.mismascotas.R;
+import com.unam.mismascotas.adapter.MascotaAdaptador;
+import com.unam.mismascotas.db.ConstructorMascotas;
+import com.unam.mismascotas.pojo.Mascota;
+
 import java.util.ArrayList;
 
 public class MascotasFav extends AppCompatActivity{

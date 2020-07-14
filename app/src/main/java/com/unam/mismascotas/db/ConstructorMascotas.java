@@ -1,8 +1,10 @@
-package com.unam.mismascotas;
+package com.unam.mismascotas.db;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
+
+import com.unam.mismascotas.pojo.Mascota;
+import com.unam.mismascotas.R;
 
 import java.util.ArrayList;
 

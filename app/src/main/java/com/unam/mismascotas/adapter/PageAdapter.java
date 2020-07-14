@@ -1,4 +1,4 @@
-package com.unam.mismascotas;
+package com.unam.mismascotas.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

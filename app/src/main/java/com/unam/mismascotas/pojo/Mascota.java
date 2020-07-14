@@ -1,4 +1,4 @@
-package com.unam.mismascotas;
+package com.unam.mismascotas.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -8,9 +8,36 @@ import java.io.Serializable;
 public class Mascota implements Serializable {
     private int id_mascota;
     private int foto;
-
     private String nombre;
     private int likes;
+
+    private String id;
+    private String nombre_u;
+    private String urlFoto;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNombre_u() {
+        return nombre_u;
+    }
+
+    public void setNombre_u(String nombre_u) {
+        this.nombre_u = nombre_u;
+    }
+
+    public String getUrlFoto() {
+        return urlFoto;
+    }
+
+    public void setUrlFoto(String urlFoto) {
+        this.urlFoto = urlFoto;
+    }
 
     public Mascota(int foto, String nombre) {
         this.foto = foto;

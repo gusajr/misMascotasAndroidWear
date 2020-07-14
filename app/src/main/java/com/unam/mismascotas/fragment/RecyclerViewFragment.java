@@ -1,10 +1,11 @@
-package com.unam.mismascotas;
+package com.unam.mismascotas.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,10 +17,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import java.io.Serializable;
+import com.unam.mismascotas.About;
+import com.unam.mismascotas.CambiarCuenta;
+import com.unam.mismascotas.Contact;
+import com.unam.mismascotas.pojo.Mascota;
+import com.unam.mismascotas.pojo.MascotasFav;
+import com.unam.mismascotas.R;
+import com.unam.mismascotas.presentador.RecyclerViewFragmentPresenter;
+import com.unam.mismascotas.adapter.MascotaAdaptador;
+import com.unam.mismascotas.presentador.iRecyclerViewFragmentPresenter;
+
 import java.util.ArrayList;
 
-public class RecyclerViewFragment extends Fragment implements iRecyclerViewFragmentView{
+public class RecyclerViewFragment extends Fragment implements iRecyclerViewFragmentView {
 
 
     private RecyclerView listaMascotas;
@@ -94,6 +104,10 @@ public class RecyclerViewFragment extends Fragment implements iRecyclerViewFragm
                 Intent i1 = new Intent (getActivity(), About.class);
                 startActivity(i1);
                 break;
+            case R.id.mCuenta:
+                Intent i2 = new Intent (getActivity(), CambiarCuenta.class);
+                startActivity(i2);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -104,6 +118,12 @@ public class RecyclerViewFragment extends Fragment implements iRecyclerViewFragm
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaMascotas.setLayoutManager(llm);
 
+    }
+
+    @Override
+    public void generarGridLayout() {
+        GridLayoutManager glm = new GridLayoutManager(getContext(), 2);
+        listaMascotas.setLayoutManager(glm);
     }
 
     @Override

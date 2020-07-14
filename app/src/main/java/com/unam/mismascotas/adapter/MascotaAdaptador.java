@@ -1,4 +1,4 @@
-package com.unam.mismascotas;
+package com.unam.mismascotas.adapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,6 +10,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
+import com.unam.mismascotas.db.ConstructorMascotas;
+import com.unam.mismascotas.pojo.Mascota;
+import com.unam.mismascotas.R;
 
 import java.util.ArrayList;
 
@@ -29,7 +34,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
     @NonNull
     @Override
     public MascotaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_mascota, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_mascota_new, parent, false);
         return new MascotaViewHolder(v);
     }
 
@@ -41,13 +46,17 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
 
         ConstructorMascotas constructorMascotas = new ConstructorMascotas(activity);
         //constructorMascotas.darLikeMascota(mascota);
-        Integer likes = (constructorMascotas.obtenerLikesMascota(mascota));
+        //Integer likes = (constructorMascotas.obtenerLikesMascota(mascota));
+        //mascotaViewHolder.ivFoto.setImageResource(mascota.getFoto());
 
-        mascotaViewHolder.ivFoto.setImageResource(mascota.getFoto());
-        mascotaViewHolder.tvNombre.setText(mascota.getNombre());
-        mascotaViewHolder.tvnLikes.setText(likes.toString());
+        mascotaViewHolder.tvNombre.setText(mascota.getNombre_u());
+        mascotaViewHolder.tvnLikes.setText(String.valueOf(mascota.getLikes()));
 
-        mascotaViewHolder.ibHuesoBlanco.setOnClickListener(new View.OnClickListener() {
+        Picasso.with(activity).load(mascota.getUrlFoto()).placeholder(R.drawable.hueso_blanco).into(mascotaViewHolder.ivFoto);
+
+
+        /*mascotaViewHolderPicasso.with(activity).load(mascota.getUrlFoto()).placeholder(R.drawable.hueso_blanco).into(mascotaViewHolder.ivFoto);
+        .ibHuesoBlanco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Integer nLikes;
@@ -61,7 +70,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
                 Integer likes = (constructorMascotas.obtenerLikesMascota(mascota));
                 mascotaViewHolder.tvnLikes.setText(likes.toString());
             }
-        });
+        });*/
     }
 
     @Override

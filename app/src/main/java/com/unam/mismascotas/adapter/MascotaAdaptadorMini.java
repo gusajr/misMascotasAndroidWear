@@ -1,15 +1,18 @@
-package com.unam.mismascotas;
+package com.unam.mismascotas.adapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
+import com.unam.mismascotas.pojo.Mascota;
+import com.unam.mismascotas.R;
 
 import java.util.ArrayList;
 
@@ -35,10 +38,11 @@ public class MascotaAdaptadorMini extends RecyclerView.Adapter<MascotaAdaptadorM
         final Mascota mascota = mascotas.get(position);
         Integer nLikes;
         nLikes = mascota.getLikes();
-        mascotaViewHolder.ivFoto.setImageResource(mascota.getFoto());
-        mascotaViewHolder.tvNombre.setText(mascota.getNombre());
+        //mascotaViewHolder.ivFoto.setImageResource(mascota.getFoto());
+        mascotaViewHolder.tvNombre.setText(mascota.getNombre_u());
         mascotaViewHolder.tvnLikes.setText((nLikes.toString()));
 
+        Picasso.with(activity).load(mascota.getUrlFoto()).placeholder(R.drawable.hueso_blanco).into(mascotaViewHolder.ivFoto);
         /*mascotaViewHolder.ibHuesoBlanco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

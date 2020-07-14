@@ -1,4 +1,4 @@
-package com.unam.mismascotas;
+package com.unam.mismascotas.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.unam.mismascotas.pojo.Mascota;
 
 import java.util.ArrayList;
 
