@@ -8,8 +8,11 @@ import androidx.viewpager.widget.ViewPager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.unam.mismascotas.R;
 import com.unam.mismascotas.adapter.PageAdapter;
 import com.unam.mismascotas.db.BaseDatos;
@@ -17,10 +20,18 @@ import com.unam.mismascotas.db.ConstantesBD;
 import com.unam.mismascotas.db.ConstructorMascotas;
 import com.unam.mismascotas.fragment.PerfilFragment;
 import com.unam.mismascotas.fragment.RecyclerViewFragment;
+import com.unam.mismascotas.notificaciones.restApi.Endpoints;
+import com.unam.mismascotas.notificaciones.restApi.adapter.RestApiAdapter;
+import com.unam.mismascotas.notificaciones.restApi.model.Response;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static final String CHANNEL_ID = "notificacion";
 
     private Toolbar tb;
     private TabLayout tl;
@@ -38,26 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
         setUpViewPager();
 
-        BaseDatos baseDatos = new BaseDatos(getBaseContext());
-        SQLiteDatabase sqLiteDatabase = baseDatos.getWritableDatabase();
-        Cursor mCursor = sqLiteDatabase.rawQuery("SELECT * FROM " + ConstantesBD.TABLE_MASCOTA, null);
-        Boolean rowExists;
-
-        if (mCursor.moveToFirst()) {
-            rowExists = true;
-
-        } else {
-            rowExists = false;
-        }
-
-        if(!rowExists){
-            ConstructorMascotas constructorMascotas = new ConstructorMascotas(getBaseContext());
-            constructorMascotas.insertarMascotas(baseDatos);
-        }
-
-        //if (tb != null) {
-        //    setSupportActionBar(tb);
-        //}
     }
 
     /*@Override
@@ -70,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Fragment> agregarFragments() {
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new RecyclerViewFragment());
-        fragments.add(new PerfilFragment());
+        fragments.add(new RecyclerViewFragment());
+        //perfil fragment
         return fragments;
     }
 

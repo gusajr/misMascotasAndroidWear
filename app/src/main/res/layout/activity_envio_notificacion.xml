@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pojo.MascotasFav">
+    tools:context=".pojo.EnvioNotificacion">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvMascotasFav"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="130dp"
-            />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar notificacion"
+        android:onClick="enviarToken"/>
 
 </RelativeLayout>

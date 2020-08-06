@@ -10,6 +10,9 @@
     <item android:id="@+id/mCuenta"
         android:title="Cambiar cuenta"
         android:orderInCategory="102"></item>
+    <item android:id="@+id/mNotificaciones"
+        android:title="Recibir notificaciones"
+        android:orderInCategory="103"></item>
     <item android:id="@+id/huella"
         app:showAsAction="always"
         android:icon="@drawable/huella"></item>

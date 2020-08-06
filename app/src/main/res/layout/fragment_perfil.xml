@@ -7,23 +7,30 @@
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-        android:paddingTop="60dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="180dp"
+            android:src="@drawable/perro5"
+            android:paddingTop="80dp"
+            android:layout_gravity="center_horizontal"
+            />
 
         <!--ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/perro3"/>
+            android:src="@drawable/perro3"/-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="40sp"
             android:text="Mimzy"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/tvNombre1"></TextView-->
+            android:id="@+id/tvNombre1"></TextView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFotos"

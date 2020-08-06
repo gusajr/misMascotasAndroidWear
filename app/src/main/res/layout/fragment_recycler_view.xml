@@ -5,10 +5,33 @@
     android:layout_height="match_parent"
     tools:context=".fragment.RecyclerViewFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMascotas"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="60dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/perro5"
+        android:paddingTop="80dp"
+        android:layout_gravity="center_horizontal"
         />
+
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Mimzy"
+         android:textSize="50dp"
+         android:layout_gravity="center_horizontal"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMascotas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="20dp"
+            android:paddingLeft="20dp"
+            />
+
+    </LinearLayout>
 </FrameLayout>
