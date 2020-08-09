@@ -4,10 +4,12 @@ public class Response {
 
     private String id;
     private String token;
+    private String animal;
 
-    public Response(String id, String token) {
+    public Response(String id, String token, String animal) {
         this.id = id;
         this.token = token;
+        this.animal = animal;
     }
 
     public Response() {
@@ -27,5 +29,13 @@ public class Response {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(String animal) {
+        this.animal = animal;
     }
 }

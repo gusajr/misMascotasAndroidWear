@@ -1,6 +1,7 @@
 package com.unam.mismascotas.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.unam.mismascotas.db.ConstructorMascotas;
+import com.unam.mismascotas.notificaciones.restApi.Endpoints;
+import com.unam.mismascotas.notificaciones.restApi.adapter.RestApiAdapter;
+import com.unam.mismascotas.notificaciones.restApi.model.Response;
 import com.unam.mismascotas.pojo.Mascota;
 import com.unam.mismascotas.R;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.MascotaViewHolder>{
 
@@ -55,22 +62,35 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
         Picasso.with(activity).load(mascota.getUrlFoto()).placeholder(R.drawable.hueso_blanco).into(mascotaViewHolder.ivFoto);
 
 
-        /*mascotaViewHolderPicasso.with(activity).load(mascota.getUrlFoto()).placeholder(R.drawable.hueso_blanco).into(mascotaViewHolder.ivFoto);
-        .ibHuesoBlanco.setOnClickListener(new View.OnClickListener() {
+        mascotaViewHolder.ivHuesoAmarillo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //Integer nLikes;
-                //nLikes = mascota.getLikes();
-                //nLikes++;
-                //mascota.setLikes(nLikes);
-                //mascotaViewHolder.tvnLikes.setText(nLikes.toString());
-                ConstructorMascotas constructorMascotas = new ConstructorMascotas(activity);
-                constructorMascotas.darLikeMascota(mascota);
+            public void onClick(View v){
+                mascota.setLikes(mascota.getLikes()+1);
+                mascotaViewHolder.tvnLikes.setText(String.valueOf(mascota.getLikes()));
+                Log.d("TOQUE_ANIMAL", "true");
+                Response response = new Response("-MEFgqImIC4ISAmI8VBO", "123", "perritos1999"); //-ME46iFob6DyrgGmJhGj
+                RestApiAdapter restApiAdapter = new RestApiAdapter();
+                Endpoints endpoints = restApiAdapter.establecerConexionAPI();
 
-                Integer likes = (constructorMascotas.obtenerLikesMascota(mascota));
-                mascotaViewHolder.tvnLikes.setText(likes.toString());
+
+                Call<Response> responseCall = endpoints.toqueAnimal(response.getId(), response.getAnimal());
+                responseCall.enqueue(new Callback<Response>() {
+                    @Override
+                    public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                        Response response1 = response.body();
+                        Log.d("ID_FIREBASE", response1.getId());
+                        //Log.d("TOKEN_FIREBASE", response1.getToken());
+                        response1.setAnimal("otro animal");
+                        Log.d("ANIMAL_FIREBASE", response1.getAnimal());
+                    }
+
+                    @Override
+                    public void onFailure(Call<Response> call, Throwable t) {
+
+                    }
+                });
             }
-        });*/
+        });
     }
 
     @Override
