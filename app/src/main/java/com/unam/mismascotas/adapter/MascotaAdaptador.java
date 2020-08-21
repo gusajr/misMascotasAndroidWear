@@ -115,3 +115,5 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
         }
     }
 }
+
+//FAITH SLIDE Y XPLODE

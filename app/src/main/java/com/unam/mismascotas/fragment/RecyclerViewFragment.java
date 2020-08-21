@@ -1,14 +1,18 @@
 package com.unam.mismascotas.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.transition.Explode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -47,6 +51,7 @@ public class RecyclerViewFragment extends Fragment implements iRecyclerViewFragm
     ArrayList<Mascota> mascotas;
     private ImageButton favoritos;
     private iRecyclerViewFragmentPresenter presenter;
+    private View v;
 
     public RecyclerViewFragment() {
         // Required empty public constructor
@@ -56,7 +61,7 @@ public class RecyclerViewFragment extends Fragment implements iRecyclerViewFragm
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_recycler_view, container, false);
+        v = inflater.inflate(R.layout.fragment_recycler_view, container, false);
         setHasOptionsMenu(true);
 
         listaMascotas = (RecyclerView) v.findViewById(R.id.rvMascotas);
@@ -72,12 +77,25 @@ public class RecyclerViewFragment extends Fragment implements iRecyclerViewFragm
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
+        //boolean version;
+        //version = checarVersion();
 
+        switch(item.getItemId()){
             case R.id.ibFavoritos:
                 Intent intent = new Intent (getActivity(), MascotasFav.class);
                 //intent.putExtra("mismascotas", (Serializable) mascotas);
-                startActivity(intent);
+
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    Explode explode = new Explode();
+                    explode.setDuration(2000);
+
+                    getActivity().getWindow().setExitTransition(explode);
+                    getActivity().startActivity(intent,
+                            ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), v, "")
+                                    .toBundle());
+                }else {
+                    startActivity(intent);
+                }
                 break;
             case R.id.mContact:
                 Intent i = new Intent (getActivity(), Contact.class);
@@ -100,6 +118,14 @@ public class RecyclerViewFragment extends Fragment implements iRecyclerViewFragm
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /*public boolean checarVersion(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            return true;
+        }else{
+            return false;
+        }
+    }*/
 
     @Override
     public void generarLinearLayoutVertical() {

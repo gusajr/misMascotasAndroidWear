@@ -18,6 +18,21 @@
             android:background="@drawable/perro1"
             />
 
+        <!--
+
+        android:transitionName="animacion_foto"
+
+        AGREGAR EN LA IMAGE VIEW PARA GENERAR TRANSICION,
+        DETECTAR EL CLIC PARA CAMBIO DE LA FOTO
+
+         getActivity().getWindow().setExitTransition(explode);
+                    getActivity().startActivity(intent,
+                            ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), v,
+                             "AQUI PONER EL MISMO NOMBRE DE LA TRANSCION")
+                                    .toBundle());
+
+        -->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
